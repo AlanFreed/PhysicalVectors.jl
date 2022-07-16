@@ -62,7 +62,7 @@ function newArrayOfPhysicalVectors(len::Integer, v₁::PhysicalVector)::ArrayOfP
 
 where `v₁` is the first entry in a new array of vectors whose length is `len`.
 
-To retrieve and assign scalar values to the entries of both a vector and an array of vectors, functions `Base.:(getindex)` and `Base.:(setindex!)` have been overloaded so that the bracket notation `[]` can be used to: *i*) retrieve and assign scalar fields belonging to an instance of `PhysicalVector`, and *ii*) retrieve and assign vector fields belonging to an instance of `ArrayOfPhysicalScalars`. 
+To retrieve and assign scalar values to the entries of a vector, or to retrieve and assign vector values an array of vectors, functions `Base.:(getindex)` and `Base.:(setindex!)` have been overloaded so that the bracket notation `[]` can be used to: *i*) retrieve and assign scalar fields belonging to an instance of `PhysicalVector`, and *ii*) retrieve and assign vector fields belonging to an instance of `ArrayOfPhysicalScalars`. 
 
 Also, conversion to a string is provided for instances of `PhysicalVector` by the re-exported method
 
