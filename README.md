@@ -12,7 +12,6 @@ Pkg.add(url = "https://github.com/AlanFreed/PhysicalFields.jl")
 Pkg.add(url = "https://github.com/AlanFreed/PhysicalScalars.jl")
 Pkg.add(url = "https://github.com/AlanFreed/PhysicalVectors.jl")
 ```
-```
 
 ## Re-exported from PhysicalFields.jl
 
