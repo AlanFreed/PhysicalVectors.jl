@@ -1,0 +1,13 @@
+name = "PhysicalVectors"
+uuid = "64d10ddd-b601-4c43-8f55-efd62453ff71"
+authors = ["AlanFreed <alan.d.freed@proton.me>"]
+version = "0.1.0"
+
+[deps]
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+MutableTypes = "0509ba21-2830-4def-8137-4dac647fee02"
+PhysicalFields = "062b95ef-bee6-454d-97f0-2f475b4729bf"
+PhysicalScalars = "ead00276-e241-41fb-9b24-fdb896b34480"
+PhysicalSystemsOfUnits = "84ba71cf-1dc3-4ac8-8ef7-c99b2cd0dd1c"
+Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
