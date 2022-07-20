@@ -21,7 +21,7 @@ Package [Reexport.jl](https://github.com/simonster/Reexport.jl), or [here](https
 const PhysicalUnits = PhysicalSystemsOfUnits.PhysicalSystemOfUnits
 ```
 
-the following type definition for a physical scalar field is exported as
+the following type definition for a physical vector field is exported as
 
 ```
 struct PhysicalVector <: PhysicalField
