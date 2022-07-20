@@ -1,6 +1,6 @@
 name = "PhysicalVectors"
 uuid = "64d10ddd-b601-4c43-8f55-efd62453ff71"
-authors = ["AlanFreed <alan.d.freed@proton.me>"]
+authors = ["Alan Freed <alan.d.freed@proton.me>"]
 version = "0.1.0"
 
 [deps]
@@ -11,3 +11,7 @@ PhysicalScalars = "ead00276-e241-41fb-9b24-fdb896b34480"
 PhysicalSystemsOfUnits = "84ba71cf-1dc3-4ac8-8ef7-c99b2cd0dd1c"
 Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[compat]
+julia = "1.7"

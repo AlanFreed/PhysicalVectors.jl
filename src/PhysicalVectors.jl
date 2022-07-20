@@ -1,4 +1,4 @@
-module PhysicalFields
+module PhysicalVectors
 
 using
     LinearAlgebra,
@@ -74,9 +74,9 @@ function toCGS(v::PhysicalVector)::PhysicalVector
     if isCGS(v)
         return v
     elseif isSI(v)
-        units  = PhysicalSystemsOfUnits.CGS(v.u.m, v.u.kg, v.u.s, v.u.K)
+        units = PhysicalSystemsOfUnits.CGS(v.u.m, v.u.kg, v.u.s, v.u.K)
         vector = newPhysicalVector(v.l, units)
-        if v.u == PhysicalSystemsOfUnits.KELVIN
+        if (v.u == PhysicalSystemsOfUnits.KELVIN)
             vector.v[:] = v.v[:] - 273.15
         else
             vector.v[:] = (100.0^v.u.m * 1000.0^v.u.kg) * v.v[:]
@@ -92,16 +92,16 @@ function toCGS(av::ArrayOfPhysicalVectors)::ArrayOfPhysicalVectors
     if isCGS(av)
         return av
     elseif isSI(av)
-        units  = PhysicalSystemsOfUnits.CGS(av.u.m, av.u.kg, av.u.s, av.u.K)
+        units = PhysicalSystemsOfUnits.CGS(av.u.m, av.u.kg, av.u.s, av.u.K)
         pv₁ = newPhysicalVector(av.l, units)
-        if units == PhysicalSystemsOfUnits.KELVIN
+        if (units == PhysicalSystemsOfUnits.KELVIN)
             pv₁.v[:] = av.a[1,:] - 273.15
         else
             pv₁.v[:] = (100.0^av.u.m * 1000.0^av.u.kg) * av.a[1,:]
         end
         vecArr = newArrayOfPhysicalVectors(av.e, pv₁)
         for i in 2:av.e
-            if units == PhysicalSystemsOfUnits.KELVIN
+            if (units == PhysicalSystemsOfUnits.KELVIN)
                 vecArr.a[i,:] = av.a[i,:] - 273.15
             else
                 vecArr.a[i,:] = (100.0^av.u.m * 1000.0^av.u.kg) * av.a[i,:]
@@ -118,9 +118,9 @@ function toSI(v::PhysicalVector)::PhysicalVector
     if isSI(v)
         return v
     elseif isCGS(v)
-        units  = PhysicalSystemsOfUnits.SI(v.u.cm, v.u.g, v.u.s, v.u.C)
+        units = PhysicalSystemsOfUnits.SI(v.u.cm, v.u.g, v.u.s, v.u.C)
         vector = newPhysicalVector(v.l, units)
-        if v.u == PhysicalSystemsOfUnits.CENTIGRADE
+        if (v.u == PhysicalSystemsOfUnits.CENTIGRADE)
             vector.v[:] = v.v[:] + 273.15
         else
             vector.v[:] = (100.0^(-v.u.cm) * 1000.0^(-v.u.g)) * v.v[:]
@@ -136,16 +136,16 @@ function toSI(av::ArrayOfPhysicalVectors)::ArrayOfPhysicalVectors
     if isSI(av)
         return av
     elseif isCGS(av)
-        units  = PhysicalSystemsOfUnits.SI(av.u.cm, av.u.g, av.u.s, av.u.C)
+        units = PhysicalSystemsOfUnits.SI(av.u.cm, av.u.g, av.u.s, av.u.C)
         pv₁ = newPhysicalVector(av.l, units)
-        if units == PhysicalSystemsOfUnits.CENTIGRADE
+        if (units == PhysicalSystemsOfUnits.CENTIGRADE)
             pv₁.v[:] = av.a[1,:] + 273.15
         else
             pv₁.v[:] = (100.0^(-av.u.cm) * 1000.0^(-av.u.g)) * av.a[1,:]
         end
         vecArr = newArrayOfPhysicalVectors(av.e, pv₁)
         for i in 2:av.e
-            if units == PhysicalSystemsOfUnits.CENTIGRADE
+            if (units == PhysicalSystemsOfUnits.CENTIGRADE)
                 vecArr.a[i,:] = av.a[i,:] + 273.15
             else
                 vecArr.a[i,:] = (100.0^(-av.u.cm) * 1000.0^(-av.u.g)) * av.a[i,:]
@@ -211,14 +211,14 @@ function Base.:≠(y::PhysicalVector, z::PhysicalVector)::Bool
                     return true
                 end
             end
-        elseif isCGS(y) && isSI(z)
+        elseif (isCGS(y) && isSI(z))
             w = toCGS(z)
             for i in 1:y.l
                 if y.v[i] ≠ w.v[i]
                     return true
                 end
             end
-        elseif isSI(y) && isCGS(z)
+        elseif (isSI(y) && isCGS(z))
             w = toCGS(y)
             for i in 1:w.l
                 if w.v[i] ≠ z.v[i]
@@ -251,14 +251,14 @@ function Base.:≈(y::PhysicalVector, z::PhysicalVector)::Bool
                     return false
                 end
             end
-        elseif isCGS(y) && isSI(z)
+        elseif (isCGS(y) && isSI(z))
             w = toCGS(z)
             for i in 1:y.l
                 if !(y.v[i] ≈ w.v[i])
                     return false
                 end
             end
-        elseif isSI(y) && isCGS(z)
+        elseif (isSI(y) && isCGS(z))
             w = toCGS(y)
             for i in 1:w.l
                 if !(w.v[i] ≈ z.v[i])
@@ -296,11 +296,11 @@ function Base.:+(y::PhysicalVector, z::PhysicalVector)::PhysicalVector
         if (isCGS(y) && isCGS(z)) || (isSI(y) && isSI(z))
             vec = newPhysicalVector(y.l, y.u)
             vec.v[:] = y.v[:] + z.v[:]
-        elseif isCGS(y) && isSI(z)
+        elseif (isCGS(y) && isSI(z))
             w = toCGS(z)
             vec = newPhysicalVector(y.l, y.u)
             vec.v[:] = y.v[:] + w.v[:]
-        elseif isSI(y) && isCGS(z)
+        elseif (isSI(y) && isCGS(z))
             w = toCGS(y)
             vec = newPhysicalVector(z.l, z.u)
             vec.v[:] = w.v[:] + z.v[:]
@@ -324,11 +324,11 @@ function Base.:-(y::PhysicalVector, z::PhysicalVector)::PhysicalVector
         if (isCGS(y) && isCGS(z)) || (isSI(y) && isSI(z))
             vec = newPhysicalVector(y.l, y.u)
             vec.v[:] = y.v[:] - z.v[:]
-        elseif isCGS(y) && isSI(z)
+        elseif (isCGS(y) && isSI(z))
             w = toCGS(z)
             vec = newPhysicalVector(y.l, y.u)
             vec.v[:] = y.v[:] - w.v[:]
-        elseif isSI(y) && isCGS(z)
+        elseif (isSI(y) && isCGS(z))
             w = toCGS(y)
             vec = newPhysicalVector(z.l, z.u)
             vec.v[:] = w.v[:] - z.v[:]
@@ -351,11 +351,11 @@ function Base.:*(y::PhysicalVector, z::PhysicalVector)::PhysicalScalar
     if (isCGS(y) && isCGS(z)) || (isSI(y) && isSI(z))
         units = y.u + z.u
         value = LinearAlgebra.dot(y.v, z.v)
-    elseif isCGS(y) && isSI(z)
+    elseif (isCGS(y) && isSI(z))
         w = toCGS(z)
         units = y.u + w.u
         value = LinearAlgebra.dot(y.v, w.v)
-    elseif isSI(y) && isCGS(z)
+    elseif (isSI(y) && isCGS(z))
         w = toCGS(y)
         units = w.u + z.u
         value = LinearAlgebra.dot(w.v, z.v)
@@ -364,7 +364,7 @@ function Base.:*(y::PhysicalVector, z::PhysicalVector)::PhysicalScalar
         throw(ErrorException(msg))
     end
     dotProduct = newPhysicalScalar(units)
-    set!(dotProduct, value)
+    PhysicalScalars.set!(dotProduct, value)
     return dotProduct
 end
 
@@ -372,17 +372,23 @@ function Base.:*(y::PhysicalScalar, z::PhysicalVector)::PhysicalVector
     if (PhysicalScalars.isCGS(y) && isCGS(z)) || (PhysicalScalars.isSI(y) && isSI(z))
         units = y.u + z.u
         scalarProduct = newPhysicalVector(z.l, units)
-        scalarProduct.v[:] = PhysicalScalars.toReal(y) * z.v[:]
-    elseif PhysicalScalars.isCGS(y) && isSI(z)
+        for i in 1:z.l
+            scalarProduct[i] = y * z[i]
+        end
+    elseif (PhysicalScalars.isCGS(y) && isSI(z))
         w = toCGS(z)
         units = y.u + w.u
         scalarProduct = newPhysicalVector(w.l, units)
-        scalarProduct.v[:] = PhysicalScalars.toReal(y) * w.v[:]
-    elseif PhysicalScalars.isSI(y) && isCGS(z)
+        for i in 1:w.l
+            scalarProduct[i] = y * w[i]
+        end
+    elseif (PhysicalScalars.isSI(y) && isCGS(z))
         w = PhysicalScalars.toCGS(y)
         units = w.u + z.u
         scalarProduct = newPhysicalVector(z.l, units)
-        scalarProduct.v[:] = PhysicalScalars.toReal(w) * z.v[:]
+        for i in 1:z.l
+            scalarProduct[i] = w * z[i]
+        end
     else
         msg = "Scalars and vectors must have either CGS or SI units."
         throw(ErrorException(msg))
@@ -400,17 +406,23 @@ function Base.:/(y::PhysicalVector, z::PhysicalScalar)::PhysicalVector
     if (isCGS(y) && PhysicalScalars.isCGS(z)) || (isSI(y) && PhysicalScalars.isSI(z))
         units = y.u - z.u
         scalarDivision = newPhysicalVector(y.l, units)
-        scalarDivision.v[:] = y.v[:] / PhysicalScalars.toReal(z)
-    elseif isCGS(y) && PhysicalScalars.isSI(z)
+        for i in 1:y.l
+            scalarDivision[i] = y[i] / z
+        end
+    elseif (isCGS(y) && PhysicalScalars.isSI(z))
         w = PhysicalScalars.toCGS(z)
         units = y.u - w.u
         scalarDivision = newPhysicalVector(y.l, units)
-        scalarDivision.v[:] = y.v[:] / PhysicalScalars.toReal(w)
-    elseif isSI(y) && PhysicalScalars.isCGS(z)
+        for i in 1:y.l
+            scalarDivision[i] = y[i] / w
+        end
+    elseif (isSI(y) && PhysicalScalars.isCGS(z))
         w = toCGS(y)
         units = w.u - z.u
         scalarDivision = newPhysicalVector(w.l, units)
-        scalarDivision.v[:] = w.v[:] / PhysicalScalars.toReal(z)
+        for i in 1:w.l
+            scalarDivision[i] = w[i] / z
+        end
     else
         msg = "Scalars and vectors must have either CGS or SI units."
         throw(ErrorException(msg))
@@ -434,7 +446,7 @@ function LinearAlgebra.:(norm)(y::PhysicalVector, p::Real=2)::PhysicalScalar
     value = norm(y.v, p)
     units = y.u
     magnitude = newPhysicalScalar(units)
-    set!(magnitude, value)
+    PhysicalScalars.set!(magnitude, value)
     return magnitude
 end
 
@@ -450,11 +462,11 @@ function LinearAlgebra.:(cross)(y::PhysicalVector, z::PhysicalVector)::PhysicalV
     if (isCGS(y) && isCGS(z)) || (isSI(y) && isSI(z))
         units = y.u + z.u
         value = cross(y.v, z.v)
-    elseif isSI(y) & isCGS(z)
+    elseif (isSI(y) && isCGS(z))
         x = toCGS(y)
         units = x.u + z.u
         value = cross(x.v, z.v)
-    elseif isCGS(y) & isSI(z)
+    elseif (isCGS(y) && isSI(z))
         x = toCGS(z)
         units = y.u + x.u
         value = cross(y.v, x.v)
@@ -465,7 +477,7 @@ function LinearAlgebra.:(cross)(y::PhysicalVector, z::PhysicalVector)::PhysicalV
     scalar = newPhysicalScalar(units)
     crossProduct = newPhysicalVector(3, units)
     for i in 1:3
-        set!(scalar, value[i])
+        PhysicalScalars.set!(scalar, value[i])
         crossProduct[i] = scalar
     end
     return crossProduct
