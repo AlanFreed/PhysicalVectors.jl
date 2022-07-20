@@ -94,14 +94,14 @@ function toCGS(av::ArrayOfPhysicalVectors)::ArrayOfPhysicalVectors
     elseif isSI(av)
         units = PhysicalSystemsOfUnits.CGS(av.u.m, av.u.kg, av.u.s, av.u.K)
         pv₁ = newPhysicalVector(av.l, units)
-        if (units == PhysicalSystemsOfUnits.KELVIN)
+        if (av.u == PhysicalSystemsOfUnits.KELVIN)
             pv₁.v[:] = av.a[1,:] - 273.15
         else
             pv₁.v[:] = (100.0^av.u.m * 1000.0^av.u.kg) * av.a[1,:]
         end
         vecArr = newArrayOfPhysicalVectors(av.e, pv₁)
         for i in 2:av.e
-            if (units == PhysicalSystemsOfUnits.KELVIN)
+            if (av.u == PhysicalSystemsOfUnits.KELVIN)
                 vecArr.a[i,:] = av.a[i,:] - 273.15
             else
                 vecArr.a[i,:] = (100.0^av.u.m * 1000.0^av.u.kg) * av.a[i,:]
@@ -138,14 +138,14 @@ function toSI(av::ArrayOfPhysicalVectors)::ArrayOfPhysicalVectors
     elseif isCGS(av)
         units = PhysicalSystemsOfUnits.SI(av.u.cm, av.u.g, av.u.s, av.u.C)
         pv₁ = newPhysicalVector(av.l, units)
-        if (units == PhysicalSystemsOfUnits.CENTIGRADE)
+        if (av.u == PhysicalSystemsOfUnits.CENTIGRADE)
             pv₁.v[:] = av.a[1,:] + 273.15
         else
             pv₁.v[:] = (100.0^(-av.u.cm) * 1000.0^(-av.u.g)) * av.a[1,:]
         end
         vecArr = newArrayOfPhysicalVectors(av.e, pv₁)
         for i in 2:av.e
-            if (units == PhysicalSystemsOfUnits.CENTIGRADE)
+            if (av.u == PhysicalSystemsOfUnits.CENTIGRADE)
                 vecArr.a[i,:] = av.a[i,:] + 273.15
             else
                 vecArr.a[i,:] = (100.0^(-av.u.cm) * 1000.0^(-av.u.g)) * av.a[i,:]
