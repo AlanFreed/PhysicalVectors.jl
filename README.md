@@ -56,7 +56,7 @@ Constructors for these types are also re-exported here, they being
 function newPhysicalVector(len::Integer, units::PhysicalUnits)::PhysicalVector
 ```
 
-which supplies a new vector whose values are set to `0` and whose physical units are those supplied by the argument `units`, and
+which supplies a new vector of dimension `len` whose values are set to `0` and whose physical units are those supplied by the argument `units`, and
 
 ```
 function newArrayOfPhysicalVectors(len::Integer, v₁::PhysicalVector)::ArrayOfPhysicalVectors
@@ -64,7 +64,7 @@ function newArrayOfPhysicalVectors(len::Integer, v₁::PhysicalVector)::ArrayOfP
 
 where `v₁` is the first entry in a new array of vectors whose length is `len`.
 
-To retrieve and assign array values, functions `Base.:(getindex)` and `Base.:(setindex!)` have been overloaded so that the bracket notation `[]` can be used to: *i)* retrieve and assign scalar fields belonging to an instance of `PhysicalVector`, and *ii)* retrieve and assign vector fields belonging to an instance of `ArrayOfPhysicalScalars`. 
+To retrieve and assign array values, functions `Base.:(getindex)` and `Base.:(setindex!)` have been overloaded so that the bracket notation `[]` can be used to: *i)* retrieve and assign scalar fields belonging to an instance of `PhysicalVector`, and *ii)* retrieve and assign vector fields belonging to an instance of `ArrayOfPhysicalVectors`. 
 
 Also, conversion to a string is provided for instances of `PhysicalVector` by the re-exported method
 
