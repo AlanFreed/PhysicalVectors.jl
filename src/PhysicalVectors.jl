@@ -300,15 +300,19 @@ function Base.:≈(y::PhysicalVector, z::PhysicalVector)::Bool
 end
 
 function Base.:+(y::PhysicalVector)::PhysicalVector
-    vec = newPhysicalVector(y.l, y.u)
-    vec.v[:] = +y.v[:]
-    return vec
+    vector = newPhysicalVector(y.l, y.u)
+    for i in 1:y.l
+        vector[i] = +y[i]
+    end
+    return vector
 end
 
 function Base.:-(y::PhysicalVector)::PhysicalVector
-    vec = newPhysicalVector(y.l, y.u)
-    vec.v[:] = -y.v[:]
-    return vec
+    vector = newPhysicalVector(y.l, y.u)
+    for i in 1:y.l
+        vector[i] = -y[i]
+    end
+    return vector
 end
 
 function Base.:+(y::PhysicalVector, z::PhysicalVector)::PhysicalVector
@@ -515,9 +519,9 @@ function LinearAlgebra.:(cross)(y::PhysicalVector, z::PhysicalVector)::PhysicalV
         msg = "Vectors must have either CGS or SI units."
         throw(ErrorException(msg))
     end
-    scalar = newPhysicalScalar(units)
     crossProduct = newPhysicalVector(3, units)
     for i in 1:3
+        scalar = newPhysicalScalar(units)
         PhysicalScalars.set!(scalar, value[i])
         crossProduct[i] = scalar
     end
