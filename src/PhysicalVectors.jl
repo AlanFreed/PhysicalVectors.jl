@@ -480,6 +480,10 @@ function Base.:/(y::PhysicalVector, z::Union{Real,MNumber})::PhysicalVector
     return scalarDivision
 end
 
+#=
+--------------------------------------------------------------------------------
+=#
+
 # Functions of type PhysicalVector:
 
 function toVector(v::PhysicalVector)::Array
