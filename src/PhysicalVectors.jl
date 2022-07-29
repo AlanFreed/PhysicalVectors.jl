@@ -492,7 +492,7 @@ function toString(v::PhysicalVector; format::Char='E')::String
     return VtoString(v; format)
 end
 
-function toArray(v::PhysicalVector)::Array
+function toArray(v::PhysicalVector)::StaticVector
     return deepcopy(v.v)
 end
 
