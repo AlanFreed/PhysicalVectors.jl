@@ -67,6 +67,14 @@ repo-url = "https://github.com/AlanFreed/PhysicalSystemsOfUnits.jl"
 uuid = "84ba71cf-1dc3-4ac8-8ef7-c99b2cd0dd1c"
 version = "0.1.1"
 
+[[deps.PhysicalVectors]]
+deps = ["LinearAlgebra", "MutableTypes", "PhysicalFields", "PhysicalScalars", "PhysicalSystemsOfUnits", "Reexport", "StaticArrays", "Test"]
+git-tree-sha1 = "6688d0b0d6ea60d99e391733802ed656b3c74182"
+repo-rev = "main"
+repo-url = "https://github.com/AlanFreed/PhysicalVectors.jl"
+uuid = "64d10ddd-b601-4c43-8f55-efd62453ff71"
+version = "0.1.3"
+
 [[deps.Printf]]
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
