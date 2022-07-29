@@ -15,7 +15,7 @@ using
     newArrayOfPhysicalVectors,
     getindex,
     setindex!,
-    toString
+    VtoString
 
 export
     # For both PhysicalVector and ArrayOfPhysicalVectors objects:
@@ -27,7 +27,9 @@ export
     copy,
     deepcopy,
     # For PhysicalVector objects:
-    toVector,
+    toString,
+    toArray,
+    # math functions
     norm,
     unitVector,
     cross
@@ -486,7 +488,11 @@ end
 
 # Functions of type PhysicalVector:
 
-function toVector(v::PhysicalVector)::Array
+function toString(v::PhysicalVector; format::Char='E')::String
+    return VtoString(v; format)
+end
+
+function toArray(v::PhysicalVector)::Array
     return deepcopy(v.v)
 end
 

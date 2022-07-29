@@ -33,11 +33,11 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 
 [[deps.MutableTypes]]
 deps = ["Printf", "Test"]
-git-tree-sha1 = "a82430f8a76ac66f19cb48930b5db118626a0b73"
+git-tree-sha1 = "f8445935ad2373609253cbfd1e83fe9538fa4a09"
 repo-rev = "main"
 repo-url = "https://github.com/AlanFreed/MutableTypes.jl"
 uuid = "0509ba21-2830-4def-8137-4dac647fee02"
-version = "0.1.2"
+version = "0.1.3"
 
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
@@ -45,19 +45,19 @@ uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
 
 [[deps.PhysicalFields]]
 deps = ["LinearAlgebra", "MutableTypes", "PhysicalSystemsOfUnits", "StaticArrays", "Test"]
-git-tree-sha1 = "e97b338b598142c6a6e1bdf075950ad1c2338b7b"
+git-tree-sha1 = "79be2d918e5afbdcc06eff2e3b46e22206e7d615"
 repo-rev = "main"
 repo-url = "https://github.com/AlanFreed/PhysicalFields.jl"
 uuid = "062b95ef-bee6-454d-97f0-2f475b4729bf"
-version = "0.1.2"
+version = "0.1.3"
 
 [[deps.PhysicalScalars]]
 deps = ["MutableTypes", "PhysicalFields", "PhysicalSystemsOfUnits", "Reexport", "Test"]
-git-tree-sha1 = "c101b7bc06fdff83b88951a3d50f5e3daa20a329"
+git-tree-sha1 = "3d9568bc344781d799623450ce5a1037530128e8"
 repo-rev = "main"
 repo-url = "https://github.com/AlanFreed/PhysicalScalars.jl"
 uuid = "ead00276-e241-41fb-9b24-fdb896b34480"
-version = "0.1.1"
+version = "0.1.3"
 
 [[deps.PhysicalSystemsOfUnits]]
 deps = ["Test"]
@@ -92,9 +92,9 @@ uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
 [[deps.StaticArrays]]
 deps = ["LinearAlgebra", "Random", "StaticArraysCore", "Statistics"]
-git-tree-sha1 = "e972716025466461a3dc1588d9168334b71aafff"
+git-tree-sha1 = "23368a3313d12a2326ad0035f0db0c0966f438ef"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "1.5.1"
+version = "1.5.2"
 
 [[deps.StaticArraysCore]]
 git-tree-sha1 = "66fe9eb253f910fe8cf161953880cfdaef01cdf0"
